@@ -1,16 +1,15 @@
 
 
 // customize some Bootstrap variables
-$primary: #420C14;
-$secondary: #D99AC5;
 
 // the ~ allows you to reference things in node_modules
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
 
-nav {
-    a{
-        color: $primary;
-    }
-    
+body{
+        background-color: $secondary;
+}
+
+nav{
+        background-color: $primary;
 }
