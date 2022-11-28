@@ -25,7 +25,8 @@
 
 	<body>
 		{% block body %}
-			<img src="{{ asset('build/images/path_to_image.png') }}" alt=""/>
+			{%  include './program/_form.html.twig' %}
+			{% include './program/_show.html.twig' %}
 		{% endblock body %}
 	</body>
 </html>
