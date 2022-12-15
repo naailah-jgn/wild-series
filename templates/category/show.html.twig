@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie{{ category.name }}
+{% endblock %}
+
+{% block body %}
+	{% for program in programs %}
+		<ul>
+			<li>
+				<h2>{{program.title}}</h2>
+				<p>{{program.synopsis}}</p>
+				<img src="{{ asset('/build/images/' ~ program.poster) }}" alt="poster"/>
+				{% for season in seasons %}
+					<div>
+						{{ season.description}}
+					{% endfor %}
+					<a href="{{ path("program_show", {id: program.id}) }}">Voir la fiche</a>
+				</li>
+			</li>
+		</p>
+	</li>
+</ul>
+{% else %}Aucune série trouvée.{% endfor %}<a href="{{ path("category_index") }}">Retour à la liste des catégories</a>{% endblock %}
