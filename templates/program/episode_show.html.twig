@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<button type="button" class="btn btn-dark mb-4 mt-4">
+		<a href="{{ path("program_season_show", { programId: program.id, seasonId: season.id } ) }}">Retour à la fiche de saison de
+			{{ program.title }}</a>
+	</button>
+
+	<div class="row justify-content-around">
+		<div class="col-4 card mb-3">
+			<h3 class="card-header">{{ program.title }}</h3>
+			<h4>Episode
+				{{episode.number}}
+				de la saison
+				{{ season.number }}</h4>
+
+			<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+			<div class="card-body">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Titre de l'épisode :
+						{{ episode.title }}
+					</li>
+					<li class="list-group-item">Résumé de l'épisode :
+					</li>
+					<li class="list-group-item">
+						{{ episode.synopsis }}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}

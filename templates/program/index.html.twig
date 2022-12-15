@@ -4,13 +4,11 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="row justify-content-around mt-4">Toutes les séries:
+<h1 class="text-center">Toutes les séries:
 </h1>
-
 {% for program in programs %}
-	<div class="grid text-center">
-		<div class="g-col-3 offset-md-4">
-			<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+		<div class="container ">
+			<div class="row col-3 card text-white bg-secondary mb-3" style="max-width: 20rem;">
 				<div class="card-header">
 					<h4 class="card-title">{{ loop.index }}
 						/
@@ -23,4 +21,4 @@
 			</div>
 		</div>
 	</div>
-</div>{% endfor %}</div>{% endblock %}
+{% endfor %}{% endblock %}
