@@ -15,24 +15,27 @@
 				{{ program.title }}</h3>
 			<div class="card-body">
 				<ul>
-					<li class="list-group-item">{{season.description}}
+					<li class="list-group-item">
+						<strong>Résumé de la saison :</strong>
 					</li>
-				</ul>
-			</div>
-			<h5 class="card-subtitle text-muted text-align-justify">Liste des épisodes</h5>
-			{% for episode in season.episodes %}
-				<div class="card-body text-align-justify" style=" width: 100%;">
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">
-							<a href="{{ path("program_episode_show", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Episode
-								{{episode.number}}
-								:
-							</a>
-							{{episode.title}}
+				</br>
+				{{season.description}}
+			</li>
+		</ul>
+	</div>
+	<h5 class="card-subtitle text-muted text-align-justify">Liste des épisodes</h5>
+	{% for episode in season.episodes %}
+		<div class="card-body text-align-justify" style=" width: 100%;">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<a href="{{ path("program_episode_show", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Episode
+						{{episode.number}}
+						:
+					</a>
+					{{episode.title}}
 
-						</li>
-					</ul>
-				</div>
-				{% endfor %}
+				</li>
+			</ul>
 		</div>
-	{% endblock %}
+	{% endfor %}
+</div>{% endblock %}
