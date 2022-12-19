@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{{ form_start(form) }}
+	<div class="my-custom-class-for-errors">
+		{% if form.title is null %}
+			{{ form_errors(form) }}
+		{% endif %}
+	</div>
+
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="col-3 pb-3 pt-3">
+				{{ form_row(form.title) }}
+			</div>
+		</div>
+
+		<div class="row d-flex justify-content-center">
+			<div class="col-3 pb-3 pt-3">
+				{{ form_row(form.synopsis) }}
+			</div>
+		</div>
+
+		<div class="row d-flex justify-content-center">
+			<div class="col-3 pb-3 pt-3">
+				{{ form_row(form.poster) }}
+			</div>
+		</div>
+
+		<div class="row d-flex justify-content-center">
+			<div class="col-3 pb-3 pt-3">
+				{{ form_row(form.category) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="row d-flex justify-content-center pb-3 pt-3">
+		<div class="col-3">
+			{{ form_row(form.submit) }}
+		</div>
+	</div>
+	{{ form_end(form) }}
+{% endblock %}

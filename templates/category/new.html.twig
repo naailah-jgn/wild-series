@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{{ form_start(form) }}
+	<div class="my-custom-class-for-errors">
+		{% if form.name is null %}
+			{{ form_errors(form) }}
+		{% endif %}
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col d-flex justify-content-center pb-3 pt-5">
+				{{ form_row(form.name) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col d-flex justify-content-center">
+				{{ form_widget(form) }}
+			</div>
+		</div>
+		{{ form_end(form) }}
+	{% endblock %}
