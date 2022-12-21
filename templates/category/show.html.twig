@@ -4,16 +4,31 @@
 {% endblock %}
 
 {% block body %}
-	{% for program in programs %}
-		<ul>
-			<li>
-				<h2>{{program.title}}</h2>
-				<p>{{program.synopsis}}</p>
-				<img src="{{ asset('/build/images/' ~ program.poster) }}" alt="poster"/>
-				<a href="{{ path("program_show", {id: program.id}) }}">Voir la fiche</a>
-			</li>
-		</ul>
+	<button type="button" class="btn btn-dark mb-4 mt-4">
+		<a href="{{ path("category_index") }}">Retour à la liste des catégories</a>
+	</button>
+
+	<h1 class="text-center">Série de la catégorie
+		{{category.name}}
+	</h1>
+</br>
+
+{% for program in programs %}
+	<div class="container">
+		<div class="row justify-content-around">
+			<div class="col-4">
+				<div class="card text-white bg-secondary mb-3" style=" max-width-20rem;">
+					<div class="card-header">
+						<h2 class="card-title">{{program.title}}</h2>
+					</div>
+					<p class="card-text mt-4">{{program.synopsis}}</p>
+					<img class="align-self-start mr-3" width="410" height="300" src="{{ asset('build/' ~ program.poster) }}" alt="{{ program.title }} poster">
+					<button type="button" class="btn btn-dark mb-4 mt-4">
+						<a href="{{ path("program_show", {id: program.id}) }}">Voir la fiche</a>
+					</button>
+				</div>
+			</div>
+		</div>
 		{% else %}Aucune série trouvée.
 	{% endfor %}
-	<a href="{{ path("category_index") }}">Retour à la liste des catégories</a>
 {% endblock %}

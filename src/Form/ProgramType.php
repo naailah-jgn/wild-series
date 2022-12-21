@@ -31,18 +31,28 @@ class ProgramType extends AbstractType
             ->add('synopsis', TextareaType::class, [
                 'attr' => [
                     'required' => true,
-                    'class' =>'tinymce',
+                    'class' =>'form-control',
                 ],
                 'label' => 'Résumé de la série',
                 'label_attr' => [
                     'class' => 'form-label'
                 ]
             ])
-            ->add('poster')
+            ->add('poster', TextType::class, [
+                'attr' => [
+                    'required' => true,
+                    'class' =>'form-control',
+                    'length' => '255',
+                ],
+                'label' => 'Image d\'une série',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ]
+            ])
             ->add('category', null, ['choice_label' => 'name',
             'attr' => [
                 'required' => true,
-                'class' =>'form-control',
+                'class' =>'form-select',
             ],
             'label' => 'Ajout d\'une catégorie',
             'label_attr' => [

@@ -25,7 +25,11 @@ class CategoryType extends AbstractType
                     'class' => 'form-label'
                 ]
             ])
-            ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-secondary'
+                ]
+            ]);
         ;
     }
 

@@ -12,8 +12,7 @@
 				{{episode.number}}
 				de la saison
 				{{ season.number }}</h4>
-
-			<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+			<img class="align-self-start mr-3" src="{{ asset('build/' ~ program.poster) }}" alt="{{ program.title }} poster ">
 			<div class="card-body">
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Titre de l'épisode :

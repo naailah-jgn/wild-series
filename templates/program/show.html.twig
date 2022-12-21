@@ -23,7 +23,7 @@
 		</br>
 		<h6>{{ program.synopsis }}</h6>
 	</div>
-	<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+	<img class="align-self-start mr-3" width="500" height="300" src="{{ asset('build/' ~ program.poster) }}" alt="{{ program.title }} poster">
 	<div class="card-body">
 		<ul class="list-group list-group-flush">
 			{% for season in program.seasons %}
