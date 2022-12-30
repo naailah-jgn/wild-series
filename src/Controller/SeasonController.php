@@ -24,14 +24,13 @@ class SeasonController extends AbstractController
     #[Route('/new', name: 'app_season_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SeasonRepository $seasonRepository): Response
     {
-        $season = new Season();
+        $season = new Season();   
         $form = $this->createForm(SeasonType::class, $season);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $seasonRepository->save($season, true);
-
-            return $this->redirectToRoute('app_season_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_season_index');
         }
 
         return $this->renderForm('season/new.html.twig', [
@@ -40,13 +39,13 @@ class SeasonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_season_show', methods: ['GET'])]
+      #[Route('/{id}', name: 'app_season_show', methods: ['GET'])]
     public function show(Season $season): Response
     {
         return $this->render('season/show.html.twig', [
             'season' => $season,
         ]);
-    }
+    } 
 
     #[Route('/{id}/edit', name: 'app_season_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Season $season, SeasonRepository $seasonRepository): Response

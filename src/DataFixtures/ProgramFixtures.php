@@ -9,7 +9,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const PROGRAM = [
+    public const Program = [
         [
             'title' => 'Walking dead', 
             'synopsis' => 'La série raconte l\'histoire d\'un petit groupe de survivants mené
@@ -57,14 +57,14 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     ];
     public function load(ObjectManager $manager)
     {
-    foreach (self::PROGRAM as $key =>$programName) {
-        $program = new Program();
-        $program->setTitle($programName['title']);
-        $program->setSynopsis($programName['synopsis']);
-        $program->setPoster('walking_dead.png');
-        $program->setCategory($this->getReference($programName['category']));
-        $manager->persist($program);
-        $this->addReference('program_' . $key, $program);
+    foreach (self::Program as $key =>$ProgramName) {
+        $Program = new Program();
+        $Program->setTitle($ProgramName['title']);
+        $Program->setSynopsis($ProgramName['synopsis']);
+        $Program->setPoster('walking_dead.png');
+        $Program->setCategory($this->getReference($ProgramName['category']));
+        $manager->persist($Program);
+        $this->addReference('Program_' . $key, $Program);
         $manager->flush();
         }
     }

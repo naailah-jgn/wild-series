@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<button type="button" class="btn btn-dark mb-4 mt-4">
-		<a href="{{ path("program_show", { id: program.id }) }}">
+	<button type="button" class="btn btn-light mb-4 mt-4">
+		<a href="{{ path("Program_show", { id: Program.id }) }}">
 			Retour à la fiche des saisons de
-			{{program.title}}
+			{{Program.title}}
 		</a>
 	</button>
 
@@ -12,7 +12,7 @@
 			<h3 class="card-header">Détail de la saison
 				{{ season.number }}
 				de
-				{{ program.title }}</h3>
+				{{ Program.title }}</h3>
 			<div class="card-body">
 				<ul>
 					<li class="list-group-item">
@@ -28,7 +28,7 @@
 		<div class="card-body text-align-justify" style=" width: 100%;">
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">
-					<a href="{{ path("program_episode_show", { programId: program.id, seasonId: season.id, episodeId: episode.id }) }}">Episode
+					<a href="{{ path("Program_episode_show", { ProgramId: Program.id, seasonId: season.id, episodeId: episode.id }) }}">Episode
 						{{episode.number}}
 						:
 					</a>

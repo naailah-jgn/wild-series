@@ -16,7 +16,7 @@ use App\Form\CategoryType;
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
 {
-    public ProgramRepository $programRepository;
+    public ProgramRepository $ProgramRepository;
 
     #[Route('/', name: 'index')]
     public function index(CategoryRepository $categoryRepository): Response
@@ -32,7 +32,6 @@ class CategoryController extends AbstractController
     {
         // Create a new Category Object //
         $category = new Category();
-
         // Create the form, linked with $category
         $form = $this->createForm(CategoryType::class, $category);
         // Get data from HTTP request
@@ -42,7 +41,7 @@ class CategoryController extends AbstractController
             // Deal with the submitted data
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
-            $categoryRepository->save($category, true);          
+            $categoryRepository->save($category, true); 
             return $this->redirectToRoute('category_index');
         }
             // Render the form (best practice)
@@ -58,22 +57,22 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{categoryName}', name: 'show')]
-    // #[Route('/program/{id}', methods: ['GET'], requirements: ['page'=>'\d+'], name: 'program_show')] //
+    // #[Route('/Program/{id}', methods: ['GET'], requirements: ['page'=>'\d+'], name: 'Program_show')] //
 
-    public function show(string $categoryName, CategoryRepository $categoryRepository, ProgramRepository $programRepository): Response
+    public function show(string $categoryName, CategoryRepository $categoryRepository, ProgramRepository $ProgramRepository): Response
     {
         $category= $categoryRepository->findOneBy(['name'=>$categoryName]);
         
 
         if (!$category) {
             throw $this->createNotFoundException(
-                'No category/program with name : '.$categoryName.' found in category\'s table.',
+                'No category/Program with name : '.$categoryName.' found in category\'s table.',
             );
         }
 
-        $programs = $programRepository->findBy(['category' => $category->getId()],['id' => 'DESC'], 3);
+        $Programs = $ProgramRepository->findBy(['category' => $category->getId()],['id' => 'DESC'], 3);
 
-            return $this->render('category/show.html.twig', ['programs' => $programs, 'category' => $category]);
+            return $this->render('category/show.html.twig', ['Programs' => $Programs, 'category' => $category]);
     }
    
     

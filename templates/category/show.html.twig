@@ -13,18 +13,18 @@
 	</h1>
 </br>
 
-{% for program in programs %}
+{% for Program in Programs %}
 	<div class="container">
 		<div class="row justify-content-around">
 			<div class="col-4">
 				<div class="card text-white bg-secondary mb-3" style=" max-width-20rem;">
 					<div class="card-header">
-						<h2 class="card-title">{{program.title}}</h2>
+						<h2 class="card-title">{{Program.title}}</h2>
 					</div>
-					<p class="card-text mt-4">{{program.synopsis}}</p>
-					<img class="align-self-start mr-3" width="410" height="300" src="{{ asset('build/' ~ program.poster) }}" alt="{{ program.title }} poster">
+					<p class="card-text mt-4">{{Program.synopsis}}</p>
+					<img class="align-self-start mr-3" width="410" height="300" src="{{ asset('build/' ~ Program.poster) }}" alt="{{ Program.title }} poster">
 					<button type="button" class="btn btn-dark mb-4 mt-4">
-						<a href="{{ path("program_show", {id: program.id}) }}">Voir la fiche</a>
+						<a href="{{ path("Program_show", {id: Program.id}) }}">Voir la fiche</a>
 					</button>
 				</div>
 			</div>

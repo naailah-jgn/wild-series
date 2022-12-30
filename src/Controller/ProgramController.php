@@ -17,77 +17,79 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use App\Form\ProgramType;
 
-#[Route('/program', name: 'program_')]
+#[Route('/Program', name: 'Program_')]
 class ProgramController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(ProgramRepository $programRepository): Response
+    public function index(ProgramRepository $ProgramRepository): Response
     {
-        $programs = $programRepository->findAll();
-            return $this->render('program/index.html.twig', [
-                'programs' => $programs
+        $Programs = $ProgramRepository->findAll();
+            return $this->render('Program/index.html.twig', [
+                'Programs' => $Programs
         ]);
         
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProgramRepository $programRepository): Response
+    public function new(Request $request, ProgramRepository $ProgramRepository): Response
     {
-        $program = new Program();
-        $form = $this->createForm(ProgramType::class, $program);
+        $Program = new Program();
+        $form = $this->createForm(ProgramType::class, $Program);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $programRepository->save($program, true);          
-            return $this->redirectToRoute('program_index');
+            $ProgramRepository->save($Program, true);     
+                 
+            return $this->redirectToRoute('Program_index');
         }
-        return $this->renderForm('program/new.html.twig', [
+        return $this->renderForm('Program/new.html.twig', [
             'form' => $form,
         ]);
     }
     
     // #[Route('/show/{id<^[0-9]+$>}', name: 'show')] // 
    #[Route('/{id}', methods: ['GET'], requirements: ['{id}'=>'\d+'], name: 'show')] 
-    public function show(Program $program, Season $seasons): Response
+    public function show(Program $Program /*, Season $seasons */): Response
     {
-        // $seasons = $seasonRepository->findByProgram([$program]); //
+        // $seasons = $seasonRepository->findByProgram([$Program]); //
 
-        if (!$program) {
+        if (!$Program) {
             throw $this->createNotFoundException(
-                'No program found in program\'s table.'
+                'No Program found in Program\'s table.'
             );
         }
-           return $this->render('program/show.html.twig', [
-                'program' => $program,
-                'seasons' => $seasons,
+           return $this->render('Program/show.html.twig', [
+                'Program' => $Program,
+               /* 'seasons' => $seasons, */
         
         ]); 
     } 
-    #[Route('/{programId}/season/{seasonId}',requirements: ['program' => '\d+', 'season' => '\d+'],
+    #[Route('/{ProgramId}/seasons/{seasonId}',requirements: ['Program' => '\d+', 'season' => '\d+'],
      methods: ['GET'], name: 'season_show')]
-     #[Entity('program', options: ['mapping' => ['programId' => 'id']])]
+     #[Entity('Program', options: ['mapping' => ['ProgramId' => 'id']])]
      #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
-     public function showSeason(Program $program, Season $season): Response
+     public function showSeason(Program $Program, Season $season): Response
      {
-       // $program = $programRepository->findOneBy(['id' => $programId]);//
+       // $Program = $ProgramRepository->findOneBy(['id' => $ProgramId]);//
          return $this->render(
-             'program/season_show.html.twig',
+             'Program/season_show.html.twig',
              [
-             'program' => $program,
+             'Program' => $Program,
              'season' => $season,
              ]
          );
      }
-     #[Route('/{programId}/season/{seasonId}/episode/{episodeId}', methods: ['GET'], name: 'episode_show')]
-     #[Entity('program', options: ['mapping' => ['programId' => 'id']])]
+     #[Route('/{ProgramId}/seasons/{seasonId}/episode/{episodeId}', methods: ['GET'], name: 'episode_show')]
+     #[Entity('Program', options: ['mapping' => ['ProgramId' => 'id']])]
      #[Entity('season', options: ['mapping' => ['seasonId' => 'id']])]
      #[Entity('episode', options: ['mapping' => ['episodeId' => 'id']])]
-     public function showEpisode(Program $program, Season $season, Episode $episode)
+     public function showEpisode(Program $Program, Season $season, Episode $episode)
      {
 
         return $this->render(
-            'program/episode_show.html.twig',
+            'Program/episode_show.html.twig',
             [
-            'program' => $program,
+            'Program' => $Program,
             'season' => $season,
             'episode' => $episode,
             ]

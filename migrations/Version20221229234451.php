@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221219153550 extends AbstractMigration
+final class Version20221229234451 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,15 @@ final class Version20221219153550 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE episode CHANGE synopsis synopsis VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE program ADD image VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE season CHANGE description description VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE episode CHANGE synopsis synopsis VARCHAR(1000) NOT NULL');
+        $this->addSql('ALTER TABLE season CHANGE description description VARCHAR(6000) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE episode CHANGE synopsis synopsis VARCHAR(1000) NOT NULL');
-        $this->addSql('ALTER TABLE program DROP image');
+        $this->addSql('ALTER TABLE program ADD image VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE season CHANGE description description VARCHAR(6000) NOT NULL');
     }
 }

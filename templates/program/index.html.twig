@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All programs
+{% block title %}All Programs
 {% endblock %}
 
 {% block body %}
 	<h1 class="text-center">Toutes les séries:
 	</h1>
 </br>
-{% for program in programs %}
+{% for Program in Programs %}
 	<div class="container">
 		<div class="row justify-content-around">
 			<div class="col-4">
@@ -15,11 +15,11 @@
 					<div class="card-header">
 						<h4 class="card-title">{{ loop.index }}
 							/
-							{{ program.title }}</h4>
+							{{ Program.title }}</h4>
 					</div>
-					<p class="card-text mt-4">{{ program.synopsis }}</p>
-					<button type="button" class="btn btn-dark mb-4 mt-4">
-						<a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
+					<p class="card-text mt-4">{{ Program.synopsis }}</p>
+					<button type="button" class="btn btn-light mb-4 mt-4">
+						<a href="{{ path("Program_show", { id: Program.id }) }}">Voir la fiche</a>
 					</button>
 				</div>
 			</div>
