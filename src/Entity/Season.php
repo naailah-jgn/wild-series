@@ -18,9 +18,15 @@ class Season
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 1)]
+    #[Assert\Positive]
     private ?int $number = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4)]
+    #[Assert\Positive]
     private ?int $year = null;
 
     #[ORM\Column]

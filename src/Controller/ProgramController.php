@@ -38,6 +38,7 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->getData());
             $ProgramRepository->save($Program, true);     
                  
             return $this->redirectToRoute('Program_index');

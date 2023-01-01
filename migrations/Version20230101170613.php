@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221229234451 extends AbstractMigration
+final class Version20230101170613 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,15 +20,14 @@ final class Version20221229234451 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE episode CHANGE synopsis synopsis VARCHAR(1000) NOT NULL');
-        $this->addSql('ALTER TABLE season CHANGE description description VARCHAR(6000) NOT NULL');
+        $this->addSql('ALTER TABLE episode ADD CONSTRAINT FK_DDAA1CDA3EB8070A FOREIGN KEY (program_id) REFERENCES program (id)');
+        $this->addSql('CREATE INDEX IDX_DDAA1CDA3EB8070A ON episode (program_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE episode CHANGE synopsis synopsis VARCHAR(1000) NOT NULL');
-        $this->addSql('ALTER TABLE program ADD image VARCHAR(255) NOT NULL');
-        $this->addSql('ALTER TABLE season CHANGE description description VARCHAR(6000) NOT NULL');
+        $this->addSql('ALTER TABLE episode DROP FOREIGN KEY FK_DDAA1CDA3EB8070A');
+        $this->addSql('DROP INDEX IDX_DDAA1CDA3EB8070A ON episode');
     }
 }

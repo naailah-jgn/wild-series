@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Episode
+{% endblock %}
+
+{% block body %}
+
+	<button type="button" class="btn btn-light mb-4 mt-4">
+		<a href="{{ path('app_episode_index') }}">Back to the list of all episodes</a>
+	</button>
+	<form>
+		<legend class="d-flex justify-content-center mt-5 pt-5">
+			<div class="col-3 card mb-3 text-center">
+				<h1>Create new Episode</h1>
+			</div>
+		</legend>
+		<div class="row mb-3 d-flex justify-content-center">
+			<div class="col-3 text-center">
+				{{ include('episode/_form.html.twig') }}
+			</div>
+		</div>
+	</form>
+{% endblock %}
