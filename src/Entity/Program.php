@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ORM\Entity]
+
 #[UniqueEntity('title', message: 'This title already exists',)]
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program
@@ -26,11 +26,11 @@ class Program
     #[Assert\Length(max: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, length: 6000)]
+    #[ORM\Column(name: 'synopsis', type: Types::TEXT, length: 6000)]
     #[Assert\NotBlank(message: 'Can\'t be empty')]
     private ?string $synopsis = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'poster', type: 'string', length: 255)]
     private ?string $poster = null;
 
     #[ORM\ManyToOne(inversedBy: 'programs')]

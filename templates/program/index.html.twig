@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{# {{ app.session.get('total') }} #}
 {% block title %}All Programs
 {% endblock %}
 
@@ -9,6 +9,13 @@
 </br>
 {% for Program in Programs %}
 	<div class="container">
+		{% for program, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert alert-{{ program }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
 		<div class="row justify-content-around">
 			<div class="col-4">
 				<div class="card text-white bg-secondary mb-3" style=" max-width-20rem;s">

@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+#[UniqueEntity('title', message: 'This title already exists',)]
 #[ORM\Entity(repositoryClass: EpisodeRepository::class)]
 class Episode
 {
@@ -16,7 +19,8 @@ class Episode
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'Input cannot be empty')]
     private ?string $title = null;
 
     #[ORM\Column]

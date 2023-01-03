@@ -79,7 +79,7 @@ class SeasonType extends AbstractType
             'label_attr' => [
                 'class' => 'form-label mt-4 row'
             ]
-        ])
+        ]) 
         ->add('submit', SubmitType::class, [
             'attr' => [
                 'class' => 'btn btn-primary mt-4 row'

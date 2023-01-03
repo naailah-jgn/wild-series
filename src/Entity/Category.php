@@ -19,11 +19,11 @@ class Category
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Program::class)]
-    private Collection $Programs;
+    private Collection $programs;
 
     public function __construct()
     {
-        $this->Programs = new ArrayCollection();
+        $this->programs = new ArrayCollection();
     }
 
 
@@ -49,25 +49,25 @@ class Category
      */
     public function getPrograms(): Collection
     {
-        return $this->Programs;
+        return $this->programs;
     }
 
-    public function addProgram(Program $Program): self
+    public function addProgram(Program $program): self
     {
-        if (!$this->Programs->contains($Program)) {
-            $this->Programs->add($Program);
-            $Program->setCategory($this);
+        if (!$this->programs->contains($program)) {
+            $this->programs->add($program);
+            $program->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeProgram(Program $Program): self
+    public function removeProgram(Program $program): self
     {
-        if ($this->Programs->removeElement($Program)) {
+        if ($this->programs->removeElement($program)) {
             // set the owning side to null (unless already changed)
-            if ($Program->getCategory() === $this) {
-                $Program->setCategory(null);
+            if ($program->getCategory() === $this) {
+                $program->setCategory(null);
             }
         }
 

@@ -20,21 +20,24 @@ class SeasonController extends AbstractController
     #[Route('/', name: 'app_season_index', methods: ['GET'])]
     public function index(SeasonRepository $seasonRepository): Response
     {
+        
         return $this->render('season/index.html.twig', [
             'seasons' => $seasonRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_season_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SeasonRepository $seasonRepository): Response
+    public function new(Request $request, SeasonRepository $seasonRepository, EntityManagerInterface $manager): Response
     {
         $season = new Season();   
         $form = $this->createForm(SeasonType::class, $season);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
-            $seasonRepository->save($season, true);
+            $season = $form->getData();
+            $manager->persist($season);
+            $manager->flush();
+            // $seasonRepository->save($season, true); //
             return $this->redirectToRoute('app_season_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -52,13 +55,12 @@ class SeasonController extends AbstractController
         ]);
     } 
 
-    #[Route('/{id}/edit', name: 'app_season_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_season_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SeasonRepository $seasonRepository): Response
     {
         $season = new Season();
         $form = $this->createForm(SeasonType::class, $season);
         $form->handleRequest($request);
-        dd($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $seasonRepository->save($season, true);
@@ -68,11 +70,10 @@ class SeasonController extends AbstractController
 
         return $this->renderForm('season/edit.html.twig', [
             'season' => $season,
-            'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_season_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_season_delete', methods: ['POST'])]
     public function delete(Request $request, Season $season, SeasonRepository $seasonRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$season->getId(), $request->request->get('_token'))) {

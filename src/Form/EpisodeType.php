@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\Unique;
 
 class EpisodeType extends AbstractType
 {
@@ -26,13 +27,17 @@ class EpisodeType extends AbstractType
                 'attr' => [
                     'required' => true,
                     'class' =>'form-control',
-                    'length' => '255',
+                    'maxlength' => '255',
                 ],
                 'label' => 'Nom d\'un épisode',
                 'label_attr' => [
                     'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Length(['max' => 255]),
+                    new NotBlank(message: 'Input cannot be empty')
                 ]
-                ])
+            ])
             ->add('number', IntegerType::class, [
                 'attr' => [
                     'required' => true,
@@ -46,7 +51,7 @@ class EpisodeType extends AbstractType
                 'constraints' => [
                     new Length(['min' => 1]),
                     new Positive(),
-                    new NotBlank()
+                    new NotBlank(message: 'Input cannot be empty')
                 ]
             ])
             ->add('synopsis', TextareaType::class, [
@@ -63,7 +68,8 @@ class EpisodeType extends AbstractType
                 'constraints' => [
                     new Length(['min' => 2, 'max' => 6000]),
                     new Positive(),
-                    new NotBlank()
+                    new NotBlank(message: 'Input cannot be empty'),
+                    new Unique(message: 'This title already exists'),
                 ]
             ])
             ->add('season', EntityType::class, [

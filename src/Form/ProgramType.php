@@ -9,6 +9,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
 
 
 
@@ -21,33 +24,48 @@ class ProgramType extends AbstractType
                 'attr' => [
                     'required' => true,
                     'class' =>'form-control',
-                    'length' => '255',
+                    'maxlength' => '255',
                 ],
                 'label' => 'Nom d\'une série',
                 'label_attr' => [
                     'class' => 'form-label'
-                ]
+                ],
+                'constraints' => [
+                    new Length(['max' => 255]),
+                    new NotBlank()
+                ]  
             ])
             ->add('synopsis', TextareaType::class, [
                 'attr' => [
                     'required' => true,
                     'class' =>'form-control',
+                    'minlength' => '2',
+                    'maxlength' => '6000',
                 ],
                 'label' => 'Résumé de la série',
                 'label_attr' => [
                     'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Length(['min' => 2, 'max' => 6000]),
+                    new Positive(),
+                    new NotBlank()
                 ]
             ])
             ->add('poster', TextType::class, [
                 'attr' => [
                     'required' => true,
                     'class' =>'form-control',
-                    'length' => '255',
+                    'maxlength' => '255',
                 ],
                 'label' => 'Image d\'une série',
                 'label_attr' => [
                     'class' => 'form-label'
-                ]
+                ],
+                'constraints' => [
+                    new Length(['max' => 255]),
+                    new NotBlank()
+                ]  
             ])
             ->add('category', null, ['choice_label' => 'name',
             'attr' => [

@@ -57,14 +57,17 @@ class EpisodeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_episode_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Episode $episode, EpisodeRepository $episodeRepository): Response
+    #[Route('/edit/{id}', name: 'app_episode_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Episode $episode, EntityManagerInterface $manager/* EpisodeRepository $episodeRepository */): Response
     {
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $episodeRepository->save($episode, true);
+            // $episodeRepository->save($episode, true); //
+            $episode = $form->getData();
+            $manager->persist($episode);
+            $manager->flush();
 
             return $this->redirectToRoute('app_episode_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,6 +83,7 @@ class EpisodeController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$episode->getId(), $request->request->get('_token'))) {
             $episodeRepository->remove($episode, true);
+            $this->addFlash('warning', 'The episode has been deleted');
         }
 
         return $this->redirectToRoute('app_episode_index', [], Response::HTTP_SEE_OTHER);

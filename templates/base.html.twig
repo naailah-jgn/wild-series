@@ -6,9 +6,8 @@
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		<link
-		rel="icon" type="image/png" href="favicon-32x32.png"/>
-		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<link rel="icon" type="image/png" href="favicon-32x32.png"/>
+
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -18,14 +17,15 @@
 		{% endblock %}
 
 		{% block header %}
-			{%  include './Program/ _navbar.html.twig' %}
+
+			{%  include './program/_navbar.html.twig' %}
 		{% endblock %}
 
 	</head>
 
 	<body>
 		{% block body %}
-			{% include './Program/show.html.twig' %}
+			{% include './program/show.html.twig' %}
 			{% include './category/new.html.twig' %}
 		{% endblock body %}
 	</body>
