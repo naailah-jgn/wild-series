@@ -6,8 +6,12 @@ use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
+#[UniqueEntity('title', message: 'This title already exists',)]
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program
 {
@@ -16,13 +20,17 @@ class Program
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'Can\'t be empty')]
+
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(name: 'synopsis', type: Types::TEXT, length: 6000)]
+    #[Assert\NotBlank(message: 'Can\'t be empty')]
     private ?string $synopsis = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'poster', type: 'string', length: 255)]
     private ?string $poster = null;
 
     #[ORM\ManyToOne(inversedBy: 'programs')]
@@ -32,9 +40,13 @@ class Program
     #[ORM\OneToMany(mappedBy: 'program', targetEntity: Season::class)]
     private Collection $seasons;
 
+    #[ORM\OneToMany(mappedBy: 'program', targetEntity: Episode::class)]
+    private Collection $episode;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
+        $this->episode = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +126,36 @@ class Program
             // set the owning side to null (unless already changed)
             if ($season->getProgram() === $this) {
                 $season->setProgram(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Episode>
+     */
+    public function getEpisode(): Collection
+    {
+        return $this->episode;
+    }
+
+    public function addEpisode(Episode $episode): self
+    {
+        if (!$this->episode->contains($episode)) {
+            $this->episode->add($episode);
+            $episode->setProgram($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEpisode(Episode $episode): self
+    {
+        if ($this->episode->removeElement($episode)) {
+            // set the owning side to null (unless already changed)
+            if ($episode->getProgram() === $this) {
+                $episode->setProgram(null);
             }
         }
 

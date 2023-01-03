@@ -1,18 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All programs
+{% block title %}Toutes les Catégories
 {% endblock %}
 
 {% block body %}
-	<h1>Catégories :
-	</h1>
-	{% for category in categories %}
-		<div>
-			<h2>{{ loop.index }}
-				/
-				{{ category.name}}</h2>
-		</div>
-		<a href="{{ path("category_show", {categoryName: category.name}) }}">Voir la fiche</a>
+	<div class="col-6 d-flex justify-content-center pt-5 pb-5">
+		<h3>Catégories :</h3>
+	</div>
 
-	{% endfor %}
+	<div class="container-sm list-group">
+		{% for category in categories %}
+			<div class="row w-50 list-group-item list-group-item-action flex-column align-items-start pr-5" style="width:300px">
+				<div class="col col-md">
+					<h4 class="mb-1">
+						{{ loop.index }}
+						/
+						{{ category.name}}
+					</h4>
+					<a href="{{ path("category_show", {categoryName: category.name}) }}">Voir la fiche</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

@@ -10,7 +10,8 @@ Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     .copyFiles({
-        from: './assets/images' 
+        from: './assets/images',
+       
     })
     // public path used by the web server to access the output path
     .setPublicPath('/build')
@@ -76,15 +77,7 @@ Encore
     //.autoProvidejQuery()
 ;
 
-const fullConfig = Encore.getWebpackConfig();
-fullConfig.devServer = {
-watchFiles: {
-paths: ['templates/**/*.html.twig'],
-},
-};
-module.exports = fullConfig;
-
-
+module.exports = Encore.getWebpackConfig();
 Encore
       // ...
 .setOutputPath('public/build/')
@@ -96,7 +89,7 @@ Encore
 
     // if versioning is enabled, add the file hash too
     //to: 'images/[path][name].[hash:8].[ext]',
-
+    to: 'images/[path][name].[hash:8].[ext]',
     // only copy files matching this pattern
-    //pattern: /\.(png|jpg|jpeg)$/
+    pattern: /\.(png|jpg|jpeg)$/
 })

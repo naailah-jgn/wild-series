@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{{ form_start(form) }}
+	<div class="my-custom-class-for-errors">
+		{% if form.name is null %}
+			{{ form_errors(form) }}
+		{% endif %}
+	</div>
+
+	<legend class="d-flex justify-content-center mt-5 pt-5">Ajouter une nouvelle catégorie</legend>
+	<div class="row mb-3 d-flex justify-content-center">
+		<div class="col-3 pt-5">
+			{{ form_row(form.name) }}
+		</div>
+	</div>
+
+	<div class="row mb-3 d-flex justify-content-center">
+		<div class="col-3 pt-3">
+			{{ form_widget(form) }}
+		</div>
+	</div>
+	{{ form_end(form) }}
+{% endblock %}

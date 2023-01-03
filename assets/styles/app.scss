@@ -7,16 +7,14 @@
 @import "~bootstrap/scss/bootstrap";
 
 body{
-        background-color: $primary;
+        background-color: $secondary;
+
 }
 
 .link:hover { color: $secondary; }
 
-.btn-dark{
-        background-color: $third;
+.navbar-dark{
+        background-color: $primary;
 }
 
-.navbar-dark{
-        background-color: $third;
-}
 

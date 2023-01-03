@@ -1,36 +1,41 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<button type="button" class="btn btn-dark mb-4 mt-4">
-		<a href="{{ path("program_show", { id: program.id }) }}">
-			Retour à la fiche de la série
-			{{program.title}}
+	<button type="button" class="btn btn-light mb-4 mt-4">
+		<a href="{{ path("Program_show", { id: Program.id }) }}">
+			Retour à la fiche des saisons de
+			{{Program.title}}
 		</a>
 	</button>
 
 	<div class="row justify-content-around mt-4">
 		<div class="col-4 card mb-3">
-			<h3 class="card-header">{{ program.title }}</h3>
+			<h3 class="card-header">Détail de la saison
+				{{ season.number }}
+				de
+				{{ Program.title }}</h3>
 			<div class="card-body">
-				<h5 class="card-title">Saison
-					{{ season.number }}</h5>
-				<h6 class="card-subtitle text-muted">Liste des épisodes</h6>
-			</div>
-			{% for episode in season.episodes %}
-				<div class="card-body text-align-justify" style=" width: 100%;">
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Episode
-							{{episode.number}}
-						</li>
-						<li class="list-group-item">{{episode.title}}
-						</li>
-						<li class="list-group-item">{{episode.synopsis}}
-						</li>
-					</ul>
-				</div>
-				<div class="card-body">
-				{% endfor %}
-				<a href="#" class=" card-link">Card link</a>
-				<a href="#" class="card-link">Another link</a>
-			</div>
+				<ul>
+					<li class="list-group-item">
+						<strong>Résumé de la saison :</strong>
+					</li>
+				</br>
+				{{season.description}}
+			</li>
+		</ul>
+	</div>
+	<h5 class="card-subtitle text-muted text-align-justify">Liste des épisodes</h5>
+	{% for episode in season.episodes %}
+		<div class="card-body text-align-justify" style=" width: 100%;">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<a href="{{ path("Program_episode_show", { ProgramId: Program.id, seasonId: season.id, episodeId: episode.id }) }}">Episode
+						{{episode.number}}
+						:
+					</a>
+					{{episode.title}}
+
+				</li>
+			</ul>
 		</div>
-	{% endblock %}
+	{% endfor %}
+</div>{% endblock %}
